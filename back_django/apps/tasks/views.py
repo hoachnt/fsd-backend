@@ -83,8 +83,6 @@ def api(request):
         body = json.loads(body_unicode)
         
         return post_request(body)
-    else:
-        return JsonResponse({'error': "Request not supported"}, status=405)
     
 @csrf_exempt
 def task_by_id(request, task_id):
@@ -99,5 +97,3 @@ def task_by_id(request, task_id):
         return HttpResponse(task_id)
     elif request.method == "GET":
         return get_by_id_request(task_id)
-    else:
-        return JsonResponse({'error': "Request not supported"}, status=405)
