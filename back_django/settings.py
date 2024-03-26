@@ -28,6 +28,14 @@ SECRET_KEY = 'django-insecure-a%4)vi5@6mn8@aqv)92gr5!fp4_nbx9nf=21zn%3yeh$5guucb
 DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'fsd-tasks.netlify.app', 'fsd-backend.hoachnt.com']
+CORS_ALLOWED_ORIGINS = [
+    "https://fsd-backend.hoachnt.com",
+    "http://0.0.0.0",
+    "http://localhost",
+    "https://fsd-tasks.netlify.app",
+    # Другие домены, с которых вы хотите разрешить запросы
+]
+CORS_ALLOW_ALL_ORIGINS = False  # Если вы хотите разрешить все источники, установите значение True
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -35,6 +43,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'grappelli',
     'articles.apps.ArticlesConfig',
     'tasks.apps.TasksConfig',
@@ -47,6 +56,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
