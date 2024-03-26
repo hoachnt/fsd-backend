@@ -4,10 +4,15 @@ from .models import Task
 from django.views.decorators.csrf import csrf_exempt
 
 
-def get_request():
+def get_all_request():
     last_100_tasks = list(Task.objects.values()[:100])
     
     return JsonResponse({'data': last_100_tasks})
+
+def get_by_id_request(task_id):
+    task = list(Task.objects.filter(id = task_id).values)[0]
+    
+    return JsonResponse({"data": task})
     
 def post_request(body):
     try:
@@ -72,7 +77,7 @@ def patch_request(body, task_id):
 @csrf_exempt
 def api(request):
     if request.method == "GET":
-        return get_request()
+        return get_all_request()
     elif request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
@@ -92,5 +97,7 @@ def task_by_id(request, task_id):
         task = Task.objects.get(id=task_id).delete()
         
         return HttpResponse(task_id)
+    elif request.method == "GET":
+        return get_by_id_request(task_id)
     else:
         return JsonResponse({'error': "Request not supported"}, status=405)
