@@ -10,7 +10,7 @@ def get_all_request():
     return JsonResponse({'data': last_100_tasks})
 
 def get_by_id_request(task_id):
-    task = list(Task.objects.filter(id = task_id).values)[0]
+    task = list(Task.objects.filter(id = task_id).values())[0]
     
     return JsonResponse({"data": task})
     
