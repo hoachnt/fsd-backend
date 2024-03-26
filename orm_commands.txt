@@ -1,0 +1,33 @@
+#Получаем артиклы
+>>> from articles.models import Article, Comment
+>>> Article.objects.all()
+<QuerySet []>
+
+#Создание артикл
+>>> from django.utils import timezone
+>>> a = Article(article_title = "Cool article", article_text = "Some cool article's text...", pub_date = timezone.now())
+>>> a.save()
+
+#Проверка создалась ли статья
+>>> a.id
+#Проверка созданной функции
+
+>>> a =Article.objects.get(id = 1)
+>>> a.was_published_recently()
+
+#Фильтрация
+>>> from django.utils import timezone
+
+>>> Article.objects.filter(article_title__startswith = "cool")
+>>> current_year = timezone.now().year
+>>> Article.objects.filter(pub_date__year = current_year)
+
+#Работа с форейнкиями
+>>> a.comment_set.create(author_name = "Hoach", commet_text = "test")
+<Comment: Hoach>
+>>> a.comment_set.create(author_name = "Hach", commet_text = "hach's test")
+<Comment: Hach>
+>>> a.comment_set.all()
+<QuerySet [<Comment: Hoach>, <Comment: Hach>]>
+>>> a.comment_set.filter(author_name__startswith = "H")
+<QuerySet [<Comment: Hoach>, <Comment: Hach>]>
