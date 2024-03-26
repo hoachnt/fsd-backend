@@ -17,22 +17,25 @@ def get_by_id_request(task_id):
 def post_request(body):
     try:
         # Проверяем наличие обязательных полей в словаре body
-        required_fields = ['title', 'description', 'date_start', 'date_end', 'date_time']
+        required_fields = ['title', 'description']
         for field in required_fields:
             if field not in body:
                 raise KeyError(field)
 
         # Проверяем наличие необязательного поля 'checked'
         checked = body.get('checked', False)
+        date_start = body.get('date_start', None)
+        date_end = body.get('date_end', None)
+        date_time = body.get('date_time', None)
 
         # Создаем новый объект Task
         new_task = Task(
             title=body['title'],
             description=body['description'],
             checked=checked,
-            date_start=body['date_start'],
-            date_end=body['date_end'],
-            date_time=body['date_time'],
+            date_start=date_start,
+            date_end=date_end,
+            date_time=date_time,
         )
         new_task.save()
         
