@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-a%4)vi5@6mn8@aqv)92gr5!fp4_nbx9nf=21zn%3yeh$5guucb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'fsd-tasks.netlify.app']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'fsd-tasks.netlify.app', 'fsd-backend.hoachnt.com']
 
 
 # Application definition
